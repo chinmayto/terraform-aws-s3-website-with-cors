@@ -6,6 +6,8 @@ In this technical blog post, we will explore how to set up Cross-Origin Resource
 ## Architecture Overview
 Before diving into the implementation details, let's outline the architecture we will be working with:
 
+![alt text](/images/diagram.png)
+
 ## Step 1: Create S3 Bucket with HTML Pages
 We will create an Amazon S3 bucket that hosts our HTML pages. These pages will  fetch resources (like images) from other S3 buckets , demonstrating the need for CORS.
 
