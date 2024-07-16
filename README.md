@@ -1,4 +1,4 @@
-# Implementing Cross-Origin Resource Sharing (CORS) with Terraform and AWS S3enabled
+# Implementing Cross-Origin Resource Sharing (CORS) with Terraform and AWS S3
 Implementing Cross-Origin Resource Sharing (CORS) with Terraform and AWS S3
 
 In this technical blog post, we will explore how to set up Cross-Origin Resource Sharing (CORS) for AWS S3 buckets using Terraform. CORS is essential for allowing web applications to make requests to a domain that is different from the one serving the web page, enabling secure and controlled data sharing across origins.
