@@ -1,15 +1,3 @@
-# Implementing Cross-Origin Resource Sharing (CORS) with Terraform and AWS S3enabled
-Implementing Cross-Origin Resource Sharing (CORS) with Terraform and AWS S3
-
-In this technical blog post, we will explore how to set up Cross-Origin Resource Sharing (CORS) for AWS S3 buckets using Terraform. CORS is essential for allowing web applications to make requests to a domain that is different from the one serving the web page, enabling secure and controlled data sharing across origins.
-
-## Architecture Overview
-Before diving into the implementation details, let's outline the architecture we will be working with:
-
-## Step 1: Create S3 Bucket with HTML Pages
-We will create an Amazon S3 bucket that hosts our HTML pages. These pages will  fetch resources (like images) from other S3 buckets , demonstrating the need for CORS.
-
-```terraform
 ################################################################################
 # S3 static website bucket for html pages
 ################################################################################
@@ -90,11 +78,7 @@ resource "aws_s3_object" "provision_source_files" {
   #acl          = "public-read" #use this only if you are using Bucket and Object ACLs, defaults to private
 }
 
-```
 
-## Step 2: Create S3 Bucket with Images
-Additionally, we will set up another S3 bucket dedicated to hosting images. These images are static assets that our web pages hosted in the first S3 bucket will request.
-```terraform
 ################################################################################
 # S3 static website bucket for images
 ################################################################################
@@ -175,12 +159,7 @@ resource "aws_s3_object" "provision_image_files" {
   #acl          = "public-read" #use this only if you are using Bucket and Object ACLs, defaults to private
 }
 
-```
 
-## Step 3: CORS Configuration
- This involves specifying which origins (domains) are allowed to access resources in our images S3 buckets.
-
-```terraform
 ################################################################################
 # Setup Cross Origin Resource Sharing CORS for Images website
 ################################################################################
@@ -194,48 +173,3 @@ resource "aws_s3_bucket_cors_configuration" "example" {
     max_age_seconds = 3000
   }
 }
-```
-
-### Steps to Run Terraform
-Follow these steps to execute the Terraform configuration:
-```terraform
-terraform init
-terraform plan 
-terraform apply -auto-approve
-```
-
-Upon successful completion, Terraform will provide relevant outputs.
-```terraform
-Apply complete! Resources: 12 added, 0 changed, 0 destroyed.
-
-Outputs:
-
-static_site_endpoint = "http://my-s3-static-bucket-html-v1.s3-website-us-east-1.amazonaws.com"
-```
-
-## Testing
-S3 buckets
-![alt text](/images/buckets.png)
-
-S3 Static Website:
-![alt text](/images/website.png)
-
-CORS details showing image loaded from CORS enabled S3 bucket
-
-![alt text](/images/corsdetails.png)
-
-## Cleanup
-Remember to stop AWS components to avoid large bills.
-```terraform
-terraform destroy -auto-approve
-```
-
-## Conclusion
-In conclusion, leveraging Terraform to automate the setup of CORS in AWS S3 buckets allows for efficient and repeatable management of cross-origin resource sharing policies. By following the steps outlined in this post and utilizing the provided resources, you can ensure secure and controlled data sharing across different origins in your web applications.
-
-Happy Coding!
-
-## Resources
-CORS: https://docs.aws.amazon.com/sdk-for-javascript/v2/developer-guide/cors.html
-
-Github Link: https://github.com/chinmayto/terraform-aws-s3-website-with-cors
